@@ -18,8 +18,8 @@ class Author(models.Model):
 
 
 class Book(models.Model):
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, verbose_name="Author")  # Moved to the top
     title = models.CharField(max_length=200, verbose_name="Book Title")
-    author = models.ForeignKey(Author, on_delete=models.CASCADE, verbose_name="Author")
 
     class Meta:
         verbose_name = "Book"
@@ -44,8 +44,8 @@ class Course(models.Model):
 
 
 class Student(models.Model):
+    courses = models.ManyToManyField(Course, verbose_name="Courses Enrolled")  # Moved to the top
     name = models.CharField(max_length=100, verbose_name="Student Name")
-    courses = models.ManyToManyField(Course, verbose_name="Courses Enrolled")
     date_of_birth = models.DateField(null=True, blank=True, verbose_name="Date of Birth")  # For Task 3
 
     class Meta:
